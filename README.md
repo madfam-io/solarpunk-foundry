@@ -1,9 +1,10 @@
 # 🌞 MADFAM: The Solarpunk Foundry
-### *From Bits to Atoms. From Rented to Sovereign.*
+### *From Bits to Atoms. High Tech, Deep Roots.*
 
 > **Version:** 0.1.0 (The Blueprint)
-> **Status:** 🟢 Active Execution
-> **Ethos:** High Tech, Deep Roots.
+> **The Mission:** To construct the operating system for a sustainable, sovereign future.
+> **The Method:** Vertical integration from the Cloud (Enclii) to the Factory (Primavera3D).
+> **The Status:** 🟢 Active Execution
 
 ---
 
@@ -38,7 +39,7 @@ Our ecosystem is organized into four biological layers. Each layer supports the 
 
 ### 🪨 Layer 1: The Soil (Infrastructure)
 *Managed by Aureo Labs*
-* **🛡️ Enclii:** Our Sovereign PaaS. We host our own cloud because AWS is too expensive and restrictive. ($100/mo vs $2k/mo).
+* **🛡️ Enclii:** Our Sovereign PaaS. We host our own cloud because AWS is too expensive and restrictive ($100/mo vs $2k/mo).
 * **🔑 Plinto:** Our Gatekeeper. Identity, SSO, and Revenue Management. It secures every app we build.
 
 ### 🌿 Layer 2: The Roots (Data Intelligence)
