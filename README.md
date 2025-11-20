@@ -1,19 +1,19 @@
 # 🌞 MADFAM: The Solarpunk Foundry
 ### *From Bits to Atoms. High Tech, Deep Roots.*
 
-> **Version:** 0.1.0 (The Blueprint)
-> **The Mission:** To construct the operating system for a sustainable, sovereign future.
-> **The Method:** Vertical integration from the Cloud (Enclii) to the Factory (Primavera3D).
-> **The Status:** 🟢 Active Execution
+* **Version:** 0.1.0 (The Blueprint)
+* **The Mission:** To construct the operating system for a sustainable, sovereign future.
+* **The Method:** Vertical integration from the Cloud (Enclii) to the Factory (Primavera3D).
+* **The Status:** 🟢 Active Execution
 
 ---
 
 ## 📖 About This Document
 This is the **Single Source of Truth** for Innovaciones MADFAM SAS de CV. It untangles our ecosystem, defines our strategy, and serves as the operating manual for our vision.
 
-> **For the Team:** This is what we are building and why.
-> **For the Investor:** This is how we capture the entire manufacturing value chain.
-> **For the World:** This is our roadmap to a sustainable future.
+* **For the Team:** This is what we are building and why.
+* **For the Investor:** This is how we capture the entire manufacturing value chain.
+* **For the World:** This is our roadmap to a sustainable future.
 
 ---
 
