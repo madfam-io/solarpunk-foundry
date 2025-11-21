@@ -1,9 +1,3 @@
-You are absolutely right. In the previous version, I grouped some tools for brevity, but for a **Single Source of Truth**, ambiguity is a bug. If it has a repo, it needs a slot in the timeline.
-
-Here is the **Definitive v0.1.0 Manifesto**. The Roadmap (Section V) has been expanded to rigorously sequence **all 14 distinct products/repos** based on their logical dependencies (Infrastructure → Data → Science → Commerce).
-
-***
-
 # 🌞 MADFAM: The Solarpunk Foundry
 ### *From Bits to Atoms. High Tech, Deep Roots.*
 
