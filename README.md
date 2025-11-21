@@ -75,22 +75,22 @@ We do not build "SaaS"; we build tools to run our own operations first.
 
 ## 🏰 IV. Governance: The Repo Strategy
 
-| Solution | Domain | GitHub Org | License | Strategic Purpose |
+| Solution | Domain | Repository | License | Strategic Purpose |
 | :--- | :--- | :--- | :--- | :--- |
-| **Enclii** | Infra | `madfam-io` | **AGPL v3** | Prevents cloud capture. |
-| **Plinto** | Auth | `madfam-io` | **AGPL v3** | Identity Trust. |
-| **Dhanam** | Finance | `madfam-io` | **MPL 2.0** | Trust in financial code. |
-| **BloomScroll**| Media | `madfam-io` | **MPL 2.0** | Ethos & Community building. |
-| **AVALA** | EdTech | `madfam-io` | **AGPL v3** | Transparent verification. |
-| **geom-core** | Science | `madfam-io` | **MPL 2.0** | The geometry standard. |
-| **Galvana** | Science | `madfam-io` | **MPL 2.0** | Open Science collaboration. |
-| **Sim4D (Community)**| Making | `madfam-io` | **MPL 2.0** | The tool (without the market). |
-| **Fortuna** | Intel | `aureo-labs` | **Proprietary**| The "Edge" (Market Gaps). |
-| **ForgeSight** | Intel | `aureo-labs` | **Proprietary**| The Cost Database. |
-| **BlueprintTube**| Intel | `aureo-labs` | **Proprietary**| The Model Index. |
-| **Forj** | Commerce | `aureo-labs` | **Proprietary**| The Revenue Engine. |
-| **Cotiza Studio**| Making | `aureo-labs` | **Proprietary**| The Pricing Logic. |
-| **Coforma Studio**| Ops | `aureo-labs` | **Proprietary**| The Customer Data. |
+| **Enclii** | [enclii.dev](https://enclii.dev) | [madfam-io/enclii](https://github.com/madfam-io/enclii) | **AGPL v3** | Prevents cloud capture. |
+| **Plinto** | [plinto.dev](https://plinto.dev) | [madfam-io/plinto](https://github.com/madfam-io/plinto) | **AGPL v3** | Identity Trust. |
+| **Dhanam** | [dhan.am](https://dhan.am) | [madfam-io/dhanam](https://github.com/madfam-io/dhanam) | **MPL 2.0** | Trust in financial code. |
+| **BloomScroll**| TBD | [madfam-io/bloom-scroll](https://github.com/madfam-io/bloom-scroll) | **MPL 2.0** | Ethos & Community building. |
+| **AVALA** | TBD | [madfam-io/avala](https://github.com/madfam-io/avala) | **AGPL v3** | Transparent verification. |
+| **geom-core** | TBD | [madfam-io/geom-core](https://github.com/madfam-io/geom-core) | **MPL 2.0** | The geometry standard. |
+| **Galvana** | TBD | [madfam-io/electrochem-sim](https://github.com/madfam-io/electrochem-sim) | **MPL 2.0** | Open Science collaboration. |
+| **Sim4D (Community)**| [sim4d.io](https://sim4d.io) | [madfam-io/brepflow](https://github.com/madfam-io/brepflow) | **MPL 2.0** | The tool (without the market). |
+| **Fortuna** | [fortuna.tube](https://fortuna.tube) | [madfam-io/fortuna](https://github.com/madfam-io/fortuna) | **Proprietary**| The "Edge" (Market Gaps). |
+| **ForgeSight** | [forgesight.quest](https://forgesight.quest) | [madfam-io/digifab-harvest-benchmark](https://github.com/madfam-io/digifab-harvest-benchmark) | **Proprietary**| The Cost Database. |
+| **BlueprintTube**| [blueprint.tube](https://blueprint.tube) | [madfam-io/blueprint-harvester](https://github.com/madfam-io/blueprint-harvester) | **Proprietary**| The Model Index. |
+| **Forj** | [forj.design](https://forj.design) | [madfam-io/forj](https://github.com/madfam-io/forj) | **Proprietary**| The Revenue Engine. |
+| **Cotiza Studio**| [cotiza.studio](https://cotiza.studio) | [madfam-io/digifab-quoting](https://github.com/madfam-io/digifab-quoting) | **Proprietary**| The Pricing Logic. |
+| **Coforma Studio**| [coforma.studio](https://coforma.studio) | [madfam-io/coforma-studio](https://github.com/madfam-io/coforma-studio) | **Proprietary**| The Customer Data. |
 
 ---
 
