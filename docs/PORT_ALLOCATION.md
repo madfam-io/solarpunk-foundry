@@ -93,9 +93,9 @@ Standardized port assignments for all services to prevent conflicts during local
 #### Sim4D/Sim4D (CAD)
 | Port | Service | Container |
 |------|---------|-----------|
-| 5173 | Sim4D Studio | brepflow-studio |
-| 3040 | Sim4D Marketing | brepflow-marketing |
-| 8081 | Collaboration WS | brepflow-collaboration |
+| 5173 | Sim4D Studio | sim4d-studio |
+| 3040 | Sim4D Marketing | sim4d-marketing |
+| 8081 | Collaboration WS | sim4d-collaboration |
 
 ### Utilities
 
