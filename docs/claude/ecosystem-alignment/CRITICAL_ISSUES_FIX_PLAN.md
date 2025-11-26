@@ -23,7 +23,7 @@ This document tracks the resolution of 12 critical version conflicts and archite
 | Prisma | 🟡 MEDIUM | 5.7, 5.8, 5.9, 6.1, 6.19 | 6.1.0 |
 | Stripe SDK | 🟡 MEDIUM | 3.0.4 (forj only) | Latest stable |
 | solarpunk-foundry | 🔴 CRITICAL | 0 consumers | 3+ consumers |
-| Auth Strategies | 🔴 CRITICAL | 5 different approaches | Plinto unified |
+| Auth Strategies | 🔴 CRITICAL | 5 different approaches | Janua unified |
 
 ---
 
@@ -230,7 +230,7 @@ ls -la /Users/aldoruizluna/labspace/solarpunk-foundry/
 
 ---
 
-## Phase 8: Auth Consolidation (Plinto Roadmap)
+## Phase 8: Auth Consolidation (Janua Roadmap)
 
 ### Current Auth Strategies (5 different approaches)
 
@@ -240,7 +240,7 @@ ls -la /Users/aldoruizluna/labspace/solarpunk-foundry/
 4. **NestJS JWT + TOTP 2FA**: dhanam
 5. **Go JWT**: enclii
 
-### Plinto Integration Timeline
+### Janua Integration Timeline
 
 | Gate | Timeline | Deliverable | Products Migrated |
 |------|----------|-------------|-------------------|
@@ -270,7 +270,7 @@ ls -la /Users/aldoruizluna/labspace/solarpunk-foundry/
 - [ ] Align Tailwind to 3.4.17
 - [ ] Align Prisma to 6.1.0
 - [ ] Bootstrap solarpunk-foundry packages
-- [ ] Document Plinto integration plan
+- [ ] Document Janua integration plan
 
 ---
 
@@ -290,4 +290,4 @@ ls -la /Users/aldoruizluna/labspace/solarpunk-foundry/
 - [ ] Unified React version (18.3.1)
 - [ ] Unified Next.js version (15.1.6)
 - [ ] solarpunk-foundry consumed by 3+ repos
-- [ ] Plinto auth integration started
+- [ ] Janua auth integration started

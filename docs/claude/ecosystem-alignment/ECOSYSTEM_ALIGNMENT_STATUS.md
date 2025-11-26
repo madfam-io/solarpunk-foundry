@@ -21,7 +21,7 @@ This document tracks the resolution of critical issues identified in the CTO eco
 | Zod | 3.22.4, 3.24.1, 4.1.x | 3.24.1 unified | ✅ FIXED |
 | Prisma | 5.7, 5.8, 5.9, 6.1, 6.19 | 6.1.0 unified | ✅ FIXED |
 | Design System | 0 consumers | Plan created | 📋 PLANNED |
-| Auth Strategies | 5 different | Plinto roadmap | 📋 PLANNED |
+| Auth Strategies | 5 different | Janua roadmap | 📋 PLANNED |
 
 ---
 
@@ -129,16 +129,16 @@ pnpm test     # Verify tests pass
    - Migrate consumers
    - See: `DESIGN_SYSTEM_ADOPTION.md`
 
-2. **Plinto Auth Integration (Gate 0-1)**
-   - Deploy Plinto to Enclii
+2. **Janua Auth Integration (Gate 0-1)**
+   - Deploy Janua to Enclii
    - Create SDKs
    - Migrate Forge Sight
-   - See: `AUTH_CONSOLIDATION_PLINTO.md`
+   - See: `AUTH_CONSOLIDATION_JANUA.md`
 
 ### Long-term (3-6 Months)
 
 1. **Complete Auth Migration (Gate 2-4)**
-   - All products on Plinto
+   - All products on Janua
    - SSO across ecosystem
    - Enterprise features
 
@@ -154,7 +154,7 @@ pnpm test     # Verify tests pass
 |----------|----------|---------|
 | Critical Issues Fix Plan | `CRITICAL_ISSUES_FIX_PLAN.md` | Detailed fix plan for all issues |
 | Design System Adoption | `DESIGN_SYSTEM_ADOPTION.md` | solarpunk-foundry adoption plan |
-| Auth Consolidation | `AUTH_CONSOLIDATION_PLINTO.md` | Plinto integration roadmap |
+| Auth Consolidation | `AUTH_CONSOLIDATION_JANUA.md` | Janua integration roadmap |
 | Verification Report | `VERIFICATION_REPORT.md` | Auto-generated verification |
 | This Document | `ECOSYSTEM_ALIGNMENT_STATUS.md` | Master tracking |
 
@@ -193,8 +193,8 @@ pnpm test     # Verify tests pass
 ### Next Sprint
 - [ ] Merge alignment PRs
 - [ ] Begin design system extraction
-- [ ] Set up Plinto development environment
-- [ ] Deploy Plinto Gate 0
+- [ ] Set up Janua development environment
+- [ ] Deploy Janua Gate 0
 
 ### Monthly Review
 - [ ] Re-run `03-verify-alignment.sh`

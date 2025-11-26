@@ -1,4 +1,4 @@
-# Auth Consolidation Roadmap - Plinto Integration
+# Auth Consolidation Roadmap - Janua Integration
 
 **Status**: Planning
 **Priority**: 🔴 CRITICAL
@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-The MADFAM ecosystem currently has **5 different authentication strategies** across products. This creates security risks, maintenance burden, and poor user experience. Plinto (formerly referenced as "Janua" in some docs) will become the unified identity platform.
+The MADFAM ecosystem currently has **5 different authentication strategies** across products. This creates security risks, maintenance burden, and poor user experience. Janua (the unified identity platform) will become the unified identity platform.
 
 ---
 
@@ -23,7 +23,7 @@ The MADFAM ecosystem currently has **5 different authentication strategies** acr
 | **forgesight** | Custom JWT | RS256 | Redis | No SSO, manual rotation |
 | **dhanam** | NestJS JWT + TOTP | RS256 + 2FA | Redis | Good 2FA, isolated |
 | **enclii** | Go JWT | RS256 | Redis | Custom implementation |
-| **janua** | Self (Plinto) | OAuth2/OIDC | PostgreSQL | The target solution |
+| **janua** | Self (Janua) | OAuth2/OIDC | PostgreSQL | The target solution |
 
 ### Problems with Current State
 
@@ -36,12 +36,12 @@ The MADFAM ecosystem currently has **5 different authentication strategies** acr
 
 ---
 
-## Target Architecture: Plinto
+## Target Architecture: Janua
 
 ### Vision
 **"One key for the whole city"** - Single sign-on across all MADFAM products
 
-### Plinto Capabilities (from spec)
+### Janua Capabilities (from spec)
 
 - **OAuth 2.0 / OIDC** compliant identity provider
 - **WebAuthn/Passkeys** as primary authentication
@@ -74,13 +74,13 @@ The MADFAM ecosystem currently has **5 different authentication strategies** acr
 - [ ] Demo applications
 
 **Technical Tasks:**
-1. Deploy Plinto core to Enclii (dogfooding)
+1. Deploy Janua core to Enclii (dogfooding)
 2. Implement passkey registration/authentication
 3. Set up JWKS endpoint with automatic rotation
 4. Create SDK packages:
-   - `@plinto/nextjs` - Next.js integration
-   - `@plinto/node` - Node.js backend SDK
-   - `@plinto/react` - React hooks
+   - `@janua/nextjs` - Next.js integration
+   - `@janua/node` - Node.js backend SDK
+   - `@janua/react` - React hooks
 
 **Success Criteria:**
 - Passkey auth working in demo app
@@ -98,16 +98,16 @@ The MADFAM ecosystem currently has **5 different authentication strategies** acr
 - Team familiar with auth patterns
 
 **Migration Steps:**
-1. Install `@plinto/nextjs` in forgesight/apps/app
-2. Replace custom JWT middleware with Plinto verification
-3. Migrate existing users to Plinto
+1. Install `@janua/nextjs` in forgesight/apps/app
+2. Replace custom JWT middleware with Janua verification
+3. Migrate existing users to Janua
 4. Update API authentication
 5. Test all auth flows
 6. Deploy to production
 7. Monitor for 2 weeks
 
 **Rollback Plan:**
-- Feature flag to switch between Plinto and legacy auth
+- Feature flag to switch between Janua and legacy auth
 - Keep legacy auth code for 30 days
 - Automated rollback if error rate > 1%
 
@@ -124,16 +124,16 @@ The MADFAM ecosystem currently has **5 different authentication strategies** acr
 1. **Cotiza Studio (digifab-quoting)**
    - Replace NextAuth + NestJS JWT
    - Preserve multi-tenant architecture
-   - Map existing roles to Plinto RBAC
+   - Map existing roles to Janua RBAC
 
 2. **Dhanam**
-   - Preserve TOTP 2FA (add as Plinto MFA option)
+   - Preserve TOTP 2FA (add as Janua MFA option)
    - Migrate mobile app authentication
    - Update financial data access controls
 
 **Migration Strategy:**
 ```
-Week 1: Install SDKs, create Plinto orgs for each tenant
+Week 1: Install SDKs, create Janua orgs for each tenant
 Week 2: Migrate web authentication
 Week 3: Migrate API authentication
 Week 4: Migrate mobile authentication (Dhanam)
@@ -151,8 +151,8 @@ Week 6: Remove legacy auth code
 - [ ] Advanced MFA options
 
 **Products to Migrate:**
-1. **madfam-site** - Replace NextAuth with Plinto SSO
-2. **Enclii** - Replace Go JWT with Plinto (self-dogfooding)
+1. **madfam-site** - Replace NextAuth with Janua SSO
+2. **Enclii** - Replace Go JWT with Janua (self-dogfooding)
 
 **Enterprise Integration:**
 ```yaml
@@ -192,18 +192,18 @@ provisioning:
 ### SDK Architecture
 
 ```typescript
-// @plinto/nextjs - Next.js App Router integration
-import { PlintoProvider, useAuth, withAuth } from '@plinto/nextjs';
+// @janua/nextjs - Next.js App Router integration
+import { JanuaProvider, useAuth, withAuth } from '@janua/nextjs';
 
 // Provider setup (app/layout.tsx)
 export default function RootLayout({ children }) {
   return (
-    <PlintoProvider
-      domain="auth.plinto.dev"
-      clientId={process.env.PLINTO_CLIENT_ID}
+    <JanuaProvider
+      domain="auth.janua.dev"
+      clientId={process.env.JANUA_CLIENT_ID}
     >
       {children}
-    </PlintoProvider>
+    </JanuaProvider>
   );
 }
 
@@ -216,7 +216,7 @@ function ProfilePage() {
 }
 
 // API route protection
-import { withAuth } from '@plinto/nextjs/server';
+import { withAuth } from '@janua/nextjs/server';
 
 export const GET = withAuth(async (req, { user }) => {
   // user is guaranteed to be authenticated
@@ -227,13 +227,13 @@ export const GET = withAuth(async (req, { user }) => {
 ### Backend Verification
 
 ```typescript
-// @plinto/node - Backend JWT verification
-import { PlintoClient, verifyToken } from '@plinto/node';
+// @janua/node - Backend JWT verification
+import { JanuaClient, verifyToken } from '@janua/node';
 
-const plinto = new PlintoClient({
-  domain: 'auth.plinto.dev',
-  clientId: process.env.PLINTO_CLIENT_ID,
-  clientSecret: process.env.PLINTO_CLIENT_SECRET,
+const janua = new JanuaClient({
+  domain: 'auth.janua.dev',
+  clientId: process.env.JANUA_CLIENT_ID,
+  clientSecret: process.env.JANUA_CLIENT_SECRET,
 });
 
 // Middleware for Express/Fastify/NestJS
@@ -242,7 +242,7 @@ async function authMiddleware(req, res, next) {
   if (!token) return res.status(401).json({ error: 'Unauthorized' });
   
   try {
-    const payload = await plinto.verifyToken(token);
+    const payload = await janua.verifyToken(token);
     req.user = payload;
     next();
   } catch (error) {
@@ -254,12 +254,12 @@ async function authMiddleware(req, res, next) {
 ### JWKS Rotation
 
 ```typescript
-// Automatic JWKS rotation (handled by Plinto)
+// Automatic JWKS rotation (handled by Janua)
 // SDKs cache JWKS with automatic refresh
 
 // Configuration
 {
-  "jwks_uri": "https://auth.plinto.dev/.well-known/jwks.json",
+  "jwks_uri": "https://auth.janua.dev/.well-known/jwks.json",
   "rotation_period": "7d",
   "algorithm": "RS256",
   "key_size": 2048
@@ -271,12 +271,12 @@ async function authMiddleware(req, res, next) {
 ## Migration Checklist by Product
 
 ### Forge Sight (Gate 1)
-- [ ] Install `@plinto/nextjs` in apps/app
-- [ ] Install `@plinto/nextjs` in apps/www
-- [ ] Install `@plinto/node` in API services
-- [ ] Create Plinto application
+- [ ] Install `@janua/nextjs` in apps/app
+- [ ] Install `@janua/nextjs` in apps/www
+- [ ] Install `@janua/node` in API services
+- [ ] Create Janua application
 - [ ] Configure OAuth2 redirect URIs
-- [ ] Migrate user database to Plinto
+- [ ] Migrate user database to Janua
 - [ ] Update protected routes
 - [ ] Update API authentication
 - [ ] Test complete auth flow
@@ -287,7 +287,7 @@ async function authMiddleware(req, res, next) {
 ### Cotiza Studio (Gate 2)
 - [ ] Install SDKs in apps/web
 - [ ] Install SDKs in apps/api
-- [ ] Map NestJS guards to Plinto
+- [ ] Map NestJS guards to Janua
 - [ ] Migrate multi-tenant auth
 - [ ] Update Prisma user models
 - [ ] Test quote creation flow
@@ -297,7 +297,7 @@ async function authMiddleware(req, res, next) {
 ### Dhanam (Gate 2)
 - [ ] Install SDKs in apps/web
 - [ ] Install SDKs in apps/api
-- [ ] Install `@plinto/react-native` in apps/mobile
+- [ ] Install `@janua/react-native` in apps/mobile
 - [ ] Preserve TOTP 2FA as MFA
 - [ ] Update financial data guards
 - [ ] Test mobile authentication
@@ -312,7 +312,7 @@ async function authMiddleware(req, res, next) {
 - [ ] Deploy and monitor
 
 ### Enclii (Gate 3)
-- [ ] Create `@plinto/go` SDK
+- [ ] Create `@janua/go` SDK
 - [ ] Replace Go JWT implementation
 - [ ] Update Switchyard API auth
 - [ ] Update CLI authentication
@@ -336,7 +336,7 @@ async function authMiddleware(req, res, next) {
 ### Rollback Strategy
 ```bash
 # Feature flag to toggle auth provider
-PLINTO_ENABLED=false  # Reverts to legacy auth
+JANUA_ENABLED=false  # Reverts to legacy auth
 
 # Emergency rollback
 ./scripts/rollback-auth.sh --product=forgesight --to=legacy
@@ -348,11 +348,11 @@ PLINTO_ENABLED=false  # Reverts to legacy auth
 
 | Metric | Target | Measurement |
 |--------|--------|-------------|
-| SSO adoption | 100% products | All products use Plinto |
+| SSO adoption | 100% products | All products use Janua |
 | Auth code reduction | -80% | LOC in auth-related code |
 | User experience | Single login | One session across products |
 | Security incidents | 0 | No auth-related breaches |
-| Uptime | 99.95% | Plinto availability |
+| Uptime | 99.95% | Janua availability |
 | Migration time | 7 months | Gate 0-4 complete |
 
 ---
@@ -360,13 +360,13 @@ PLINTO_ENABLED=false  # Reverts to legacy auth
 ## Immediate Actions
 
 ### This Week
-1. Review Plinto specification in `janua/` repo
-2. Set up Plinto development environment
-3. Create `@plinto/nextjs` SDK skeleton
+1. Review Janua specification in `janua/` repo
+2. Set up Janua development environment
+3. Create `@janua/nextjs` SDK skeleton
 4. Define Forge Sight migration plan
 
 ### Next Sprint
 1. Complete Gate 0 deliverables
-2. Deploy Plinto to Enclii (dogfooding)
+2. Deploy Janua to Enclii (dogfooding)
 3. Begin Forge Sight migration
 4. Create monitoring dashboards

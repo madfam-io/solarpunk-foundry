@@ -11,7 +11,7 @@
 
 Port assignments follow ecosystem-wide conventions:
 
-- **8000-8099**: Infrastructure & Auth (Janua, Enclii, Plinto)
+- **8000-8099**: Infrastructure & Auth (Janua, Enclii, Janua)
 - **8100-8199**: Data & Sensing Layer (Fortuna, Forge Sight, Blueprint Harvester)
 - **8200-8299**: Business Logic & Processing (APIs, Workers, ML Services)
 - **3000-3099**: Public Frontends (Marketing, Dashboards, Studios)
