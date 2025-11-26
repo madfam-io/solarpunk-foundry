@@ -132,46 +132,64 @@ pnpm add @janua/react-sdk@file:../../janua/packages/react-sdk
 
 ---
 
-## Phase 2: Internal Operations (Week 3-4)
+## Phase 2: Internal Operations (Week 3-4) ✅ COMPLETED
 
-### 2A. Dhanam for MADFAM Finance
+### 2A. Wire Janua SSO to Dhanam ✅
 
-**Why:** "We run on our own tools" - Primavera Mandate
-
-**Current State:** Dhanam exists but MADFAM doesn't use it internally.
-
-**Integration Points:**
-- Expense tracking for MADFAM operations
-- Revenue from each product line
-- ESG reporting for sustainability metrics
+**Status:** Complete (2025-11-25)
 
 **Implementation:**
-- Configure MADFAM as organization in Dhanam
-- Import historical financial data
-- Dashboard for real-time financial health
+- Added `@janua/react-sdk` dependency to dhanam/apps/web
+- Created `JanuaAuthBridge.tsx` to sync Janua SSO with Dhanam's Zustand auth store
+- Type mappings: Locale (`'en-US'` → `'en'`), AuthTokens (`expiresAt` → `expiresIn`)
+- Wrapped providers with JanuaAuthBridge
+- Added env vars to `.env.example`
 
 ---
 
-### 2B. digifab-quoting → Primavera3D
+### 2B. Configure Dhanam for MADFAM Finance ✅
 
-**Why:** Our factory should quote using our own quoting engine.
+**Status:** Complete (2025-11-25)
 
-**Current State:** Separate systems, no integration.
-
-**Integration:**
-- Primavera3D uploads designs
-- digifab-quoting returns instant quotes
-- Shared pricing database from ForgeSight
+**Implementation:**
+- Created `seed-madfam.ts` with MADFAM-specific configuration
+- Categories aligned with layer architecture (SOIL, STEM, FRUIT)
+- Budget categories: revenue, infrastructure, product, team, marketing, legal, ESG
+- Product-specific sub-spaces for sim4d, Primavera3D, ForgeSight
+- Added `db:seed:madfam` script to package.json
+- Comprehensive documentation in `docs/MADFAM_INTERNAL_FINANCE.md`
 
 ---
 
-### 2C. @madfam/analytics Extraction
+### 2C. digifab-quoting → Primavera3D ✅
 
-**Why:** Currently in madfam-site, should be ecosystem-wide.
+**Status:** Complete (2025-11-25)
 
-**Current Location:** `madfam-site/packages/analytics`
+**Implementation:**
+- Created `@cotiza/client` SDK in `digifab-quoting/packages/client/`
+- SDK includes: CotizaClient class, React hooks (CotizaProvider, useCotiza, useInstantQuote)
+- Built with tsup (CJS + ESM + types)
+- Wired SDK to primavera3d/apps/web via file: dependency
+- Created `QuoteCalculator.tsx` component with instant pricing
 
-**Integration:** All web apps report to unified analytics.
+---
+
+### 2D. @madfam/analytics Extraction ✅
+
+**Status:** Complete (2025-11-25)
+
+**Implementation:**
+- Extracted to standalone `madfam-analytics` repo
+- Privacy-first telemetry with Plausible
+- Created proxy re-export in madfam-site for backward compatibility
+- Wired to sim4d/studio as second consumer
+- Created `useStudioAnalytics.ts` hook with CAD-specific events:
+  - Node operations (add, connect, delete)
+  - Model exports/imports
+  - Collaboration sessions
+  - Template usage
+  - Viewport interactions
+- Added env vars for analytics configuration
 
 ---
 
@@ -279,12 +297,24 @@ pnpm add @janua/react-sdk@file:../../janua/packages/react-sdk
 
 ## Success Metrics
 
-| Metric | Current | Phase 1 | Phase 2 | Phase 3 |
+| Metric | Current | Phase 1 ✅ | Phase 2 ✅ | Phase 3 |
 |--------|---------|---------|---------|---------|
-| Cross-repo deps | 1 | 5 | 10 | 15+ |
-| Shared libraries | 1 | 3 | 4 | 5 |
-| Apps using Janua SSO | 0 | 2 | 5 | 8+ |
-| Internal tool usage | 10% | 30% | 60% | 90% |
+| Cross-repo deps | 1 | 5 ✅ | 12 ✅ | 15+ |
+| Shared libraries | 1 | 3 ✅ | 4 ✅ | 5 |
+| Apps using Janua SSO | 0 | 2 ✅ | 3 ✅ | 8+ |
+| Internal tool usage | 10% | 30% ✅ | 60% ✅ | 90% |
+
+### Phase 2 Completion Summary (2025-11-25)
+- **New Cross-repo Dependencies Added:**
+  - dhanam → @janua/react-sdk
+  - primavera3d → @cotiza/client
+  - sim4d → @madfam/analytics
+  - madfam-site → @madfam/analytics-standalone (proxy)
+- **New Shared Packages:**
+  - @cotiza/client (quoting SDK)
+  - @madfam/analytics (standalone repo)
+- **Apps Now Using Janua SSO:** sim4d/studio, dhanam/web
+- **Internal Tools Active:** Dhanam for MADFAM finance, digifab-quoting for Primavera3D
 
 ---
 

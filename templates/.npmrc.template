@@ -1,0 +1,19 @@
+# MADFAM Private Registry Configuration
+# Copy to project root as .npmrc
+
+# Scoped packages use private registry
+@madfam:registry=https://npm.madfam.io
+@janua:registry=https://npm.madfam.io
+@cotiza:registry=https://npm.madfam.io
+@fortuna:registry=https://npm.madfam.io
+@avala:registry=https://npm.madfam.io
+@forgesight:registry=https://npm.madfam.io
+@coforma:registry=https://npm.madfam.io
+@forj:registry=https://npm.madfam.io
+@enclii:registry=https://npm.madfam.io
+
+# Auth token (set via npm login or CI/CD secret)
+# //npm.madfam.io/:_authToken=${NPM_MADFAM_TOKEN}
+
+# All other packages from public npm
+registry=https://registry.npmjs.org/
