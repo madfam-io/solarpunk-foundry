@@ -25,29 +25,29 @@ cp templates/analytics/analytics.ts ~/your-app/src/lib/analytics.ts
 
 # Install dependencies
 cd ~/your-app
-pnpm add plausible-tracker @solarpunk/core
+pnpm add plausible-tracker @madfam/core
 ```
 
 **Features:**
-- Type-safe events from `@solarpunk/core` taxonomy
+- Type-safe events from `@madfam/core` taxonomy
 - Automatic session tracking
 - Convenience methods for common events
 - React hook support
 
 ### Tailwind Config (`tailwind/`)
 
-Tailwind CSS configuration using `@solarpunk/core` design tokens.
+Tailwind CSS configuration using `@madfam/core` design tokens.
 
 ```bash
 # Copy to your app
 cp templates/tailwind/tailwind.config.ts ~/your-app/tailwind.config.ts
 
-# Install @solarpunk/core
-pnpm add @solarpunk/core
+# Install @madfam/core
+pnpm add @madfam/core
 ```
 
 **Features:**
-- Brand colors from `@solarpunk/core`
+- Brand colors from `@madfam/core`
 - Typography, spacing, shadows from design tokens
 - Dark mode support
 - Extensible for app-specific needs
@@ -70,14 +70,14 @@ cp templates/tsconfig/node.json ~/your-app/tsconfig.json
 cp templates/tsconfig/library.json ~/your-package/tsconfig.json
 ```
 
-## When to Use Templates vs @solarpunk/core
+## When to Use Templates vs @madfam/core
 
 | Need | Use |
 |------|-----|
-| Brand colors, design tokens | `@solarpunk/core` (import) |
-| Supported locales/currencies | `@solarpunk/core` (import) |
-| Analytics event taxonomy | `@solarpunk/core` (import) |
-| Legal info, product registry | `@solarpunk/core` (import) |
+| Brand colors, design tokens | `@madfam/core` (import) |
+| Supported locales/currencies | `@madfam/core` (import) |
+| Analytics event taxonomy | `@madfam/core` (import) |
+| Legal info, product registry | `@madfam/core` (import) |
 | Analytics implementation | Template (copy) |
 | Tailwind configuration | Template (copy) |
 | TypeScript configuration | Template (copy) |
@@ -85,7 +85,7 @@ cp templates/tsconfig/library.json ~/your-package/tsconfig.json
 
 ## The Rule
 
-**`@solarpunk/core`** = Organizational decisions (import as dependency)
+**`@madfam/core`** = Organizational decisions (import as dependency)
 **Templates** = Reference implementations (copy and own)
 
 This ensures apps can always:

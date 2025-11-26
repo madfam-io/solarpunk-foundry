@@ -6,7 +6,7 @@
 
 Analysis of 19 repositories reveals a modular ecosystem with **one critical shared dependency** (@madfam/geom-core) and primarily self-contained monorepos. No circular dependencies detected.
 
-**Key Finding:** Only **sim4d (BrepFlow)** depends on the shared **geom-core** package, creating a simple unidirectional dependency graph.
+**Key Finding:** Only **sim4d (Sim4D)** depends on the shared **geom-core** package, creating a simple unidirectional dependency graph.
 
 ---
 
@@ -204,7 +204,7 @@ Analysis of 19 repositories reveals a modular ecosystem with **one critical shar
 - **Tech Stack:** TypeScript + OpenCascade WASM bindings
 - **Internal Dependencies:** None
 - **External Dependencies:** `opencascade.js` (peer dependency, optional)
-- **Dependents:** ✅ **sim4d (BrepFlow)**
+- **Dependents:** ✅ **sim4d (Sim4D)**
 
 **Key Architecture:**
 - Zero-lag browser execution
@@ -315,7 +315,7 @@ apps/marketing → @janua/react-sdk, @janua/ui
 
 ---
 
-### 18. **sim4d** (BrepFlow) (Monorepo) 🔥🔑
+### 18. **sim4d** (Sim4D) (Monorepo) 🔥🔑
 - **Package:** `brepflow`
 - **Purpose:** Web-first, node-based parametric CAD (alpha) - Real OCCT.wasm geometry kernel
 - **Type:** Turbo monorepo (pnpm)
@@ -389,7 +389,7 @@ brepflow (root) → @madfam/geom-core (file:../geom-core)
                    │
                    ▼
 ┌──────────────────────────────────────────┐
-│         sim4d (BrepFlow)                 │
+│         sim4d (Sim4D)                 │
 │   Node-based Parametric CAD              │
 │   (OCCT.wasm + React + WebGL)            │
 └──────────────────────────────────────────┘
@@ -463,7 +463,7 @@ All internal dependencies use `workspace:*` protocol (pnpm/npm/yarn workspaces).
 ### By Domain
 
 **CAD/Geometry:**
-- sim4d (BrepFlow) - Parametric CAD
+- sim4d (Sim4D) - Parametric CAD
 - geom-core - Geometry engine
 - primavera3d - 3D modeling portfolio
 
@@ -507,7 +507,7 @@ All internal dependencies use `workspace:*` protocol (pnpm/npm/yarn workspaces).
 
 **Risk:** `@madfam/geom-core`
 - Only shared library with external dependents
-- Breaking changes would impact sim4d (BrepFlow)
+- Breaking changes would impact sim4d (Sim4D)
 - WASM compilation adds complexity
 
 **Mitigation:**

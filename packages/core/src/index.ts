@@ -1,5 +1,5 @@
 /**
- * @solarpunk/core
+ * @madfam/core
  *
  * Authoritative organizational constants for the MADFAM/Solarpunk ecosystem.
  *

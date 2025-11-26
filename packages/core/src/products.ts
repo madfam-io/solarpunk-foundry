@@ -1,5 +1,5 @@
 /**
- * @solarpunk/core - Product Registry
+ * @madfam/core - Product Registry
  *
  * Authoritative registry of all products in the Solarpunk ecosystem.
  * This is derived directly from the governance manifesto (README.md Section IV).

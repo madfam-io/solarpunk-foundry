@@ -68,7 +68,7 @@ cd ~/labspace/solarpunk-foundry/ops/bin
 | Aureo Labs (dev) | 3011 | http://localhost:3011 |
 | Primavera3D (prod) | 3020 | http://localhost:3020 |
 | Primavera3D (dev) | 3021 | http://localhost:3021 |
-| **CAD (BrepFlow)** |||
+| **CAD (Sim4D)** |||
 | Studio | 5173 | http://localhost:5173 |
 | Marketing | 3040 | http://localhost:3040 |
 | Collaboration WS | 8081 | ws://localhost:8081 |
@@ -89,7 +89,7 @@ cd ~/labspace/solarpunk-foundry/ops/bin
 | 3 | Dhanam | Financial cache |
 | 4 | Fortuna | API/Jobs cache |
 | 5 | Fortuna | NLP model cache |
-| 6 | BrepFlow | Collaboration |
+| 6 | Sim4D | Collaboration |
 | 7-15 | Reserved | Future services |
 
 ---

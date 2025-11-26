@@ -1,5 +1,5 @@
 /**
- * @solarpunk/core - Localization
+ * @madfam/core - Localization
  *
  * Authoritative locale and internationalization constants.
  * These define which languages the ecosystem officially supports.

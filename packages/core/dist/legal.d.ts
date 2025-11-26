@@ -1,5 +1,5 @@
 /**
- * @solarpunk/core - Legal & Compliance
+ * @madfam/core - Legal & Compliance
  *
  * Authoritative legal information for the ecosystem.
  * These values MUST be used consistently across all applications.

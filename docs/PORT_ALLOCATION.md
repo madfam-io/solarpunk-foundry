@@ -7,12 +7,12 @@ Standardized port assignments for all services to prevent conflicts during local
 | Range | Category | Services |
 |-------|----------|----------|
 | 3000-3099 | Web Frontends | All Next.js/React/Vue web apps |
-| 5173 | Vite Dev | BrepFlow Studio |
+| 5173 | Vite Dev | Sim4D Studio |
 | 8000-8099 | Auth & Core | Janua, Core platform APIs |
 | 8100-8199 | Revenue APIs | Forgesight |
 | 8200-8299 | Revenue APIs | Forgesight extensions |
 | 8300-8399 | Quote APIs | Digifab Quoting |
-| 8400-8499 | CAD APIs | BrepFlow/Sim4D |
+| 8400-8499 | CAD APIs | Sim4D/Sim4D |
 | 8500-8599 | Finance APIs | Dhanam |
 | 8600-8699 | Analytics APIs | Fortuna |
 | 8700-8799 | Simulation APIs | Galvana/Electrochem-sim |
@@ -90,11 +90,11 @@ Standardized port assignments for all services to prevent conflicts during local
 | 9201 | OpenSearch | fortuna-opensearch |
 | 9601 | OpenSearch Perf | fortuna-opensearch |
 
-#### BrepFlow/Sim4D (CAD)
+#### Sim4D/Sim4D (CAD)
 | Port | Service | Container |
 |------|---------|-----------|
-| 5173 | BrepFlow Studio | brepflow-studio |
-| 3040 | BrepFlow Marketing | brepflow-marketing |
+| 5173 | Sim4D Studio | brepflow-studio |
+| 3040 | Sim4D Marketing | brepflow-marketing |
 | 8081 | Collaboration WS | brepflow-collaboration |
 
 ### Utilities
@@ -115,7 +115,7 @@ Standardized port assignments for all services to prevent conflicts during local
 | 3 | Dhanam | Financial data cache |
 | 4 | Fortuna | Analytics cache |
 | 5 | Digifab | Manufacturing queue |
-| 6 | BrepFlow | Collaboration sessions |
+| 6 | Sim4D | Collaboration sessions |
 | 7 | Galvana | Simulation jobs |
 
 ## Environment Variables Reference

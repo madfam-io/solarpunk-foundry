@@ -1,7 +1,7 @@
 import { ProductId } from './products.js';
 
 /**
- * @solarpunk/core - Analytics Event Taxonomy
+ * @madfam/core - Analytics Event Taxonomy
  *
  * Authoritative analytics event schema for cross-ecosystem tracking.
  * This defines the STRUCTURE of events, not the implementation.

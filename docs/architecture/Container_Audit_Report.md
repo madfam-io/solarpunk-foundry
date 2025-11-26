@@ -427,12 +427,12 @@ CMD ["node", "dist/main.js"]
 
 ---
 
-### 4. sim4d-studio (BrepFlow CAD - Production)
+### 4. sim4d-studio (Sim4D CAD - Production)
 
 **File**: `sim4d/Dockerfile.studio.production`
 
 ```dockerfile
-# Production Dockerfile for sim4d/BrepFlow Studio
+# Production Dockerfile for sim4d/Sim4D Studio
 # Enclii-compliant: ✅ All 5 criteria met (multi-stage + non-root)
 
 # ============================================
@@ -1047,7 +1047,7 @@ EXPO_PUBLIC_ENABLE_ESG=true
 
 ---
 
-#### 🛠️ sim4d (BrepFlow CAD)
+#### 🛠️ sim4d (Sim4D CAD)
 
 **Critical Secrets**:
 ```env

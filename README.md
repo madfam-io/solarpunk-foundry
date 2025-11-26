@@ -197,4 +197,4 @@ All services connect to shared PostgreSQL, Redis, and MinIO via `madfam-shared-n
 | Forgesight | http://localhost:8200 |
 | Digifab Quoting | http://localhost:8300 |
 | Dhanam | http://localhost:8500 |
-| BrepFlow Studio | http://localhost:5173 |
+| Sim4D Studio | http://localhost:5173 |

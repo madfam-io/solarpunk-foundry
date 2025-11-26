@@ -1,5 +1,5 @@
 /**
- * @solarpunk/core - Currencies
+ * @madfam/core - Currencies
  *
  * Authoritative currency constants for the ecosystem.
  * These define which currencies are officially supported for transactions.

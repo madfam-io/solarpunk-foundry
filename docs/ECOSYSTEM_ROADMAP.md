@@ -1,478 +1,199 @@
-# MADFAM Ecosystem - Long-Term Health Roadmap
+# MADFAM Ecosystem - Production Readiness Roadmap
+
+> **Last Updated:** 2025-11-26
+> **Version:** 0.1.0
 
 ## Executive Summary
 
-The ecosystem has **strong foundations** (well-architected apps, shared infrastructure, clear domain separation) but lacks **production-readiness infrastructure**. This roadmap prioritizes fixes by impact and effort.
+The MADFAM ecosystem is **pre-deployment** - all repositories exist and are structured, but no services are running in production yet. We are waiting for Hetzner server access to deploy Enclii (infrastructure), then Janua (auth), and cascade from there.
 
 ---
 
-## Current State
+## Current State (As of 2025-11-26)
 
-### ✅ What's Working
-- Shared PostgreSQL, Redis, MinIO infrastructure
-- Federated architecture with clear service boundaries
-- Python APIs (Janua, Forgesight) build and run correctly
-- Domain alignment (enclii.dev, janua.dev)
-- Port allocation strategy documented
+### ✅ Completed
 
-### 🔴 Critical Blockers (Production Impossible)
-1. No pnpm lock files → Non-reproducible builds
-2. Unpublished npm packages → Docker builds fail
-3. No CI/CD pipelines → Manual deployment only
-4. No deployment configuration → Production undefined
+| Item | Status | Notes |
+|------|--------|-------|
+| Repository structure | ✅ Done | 18 repos in labspace |
+| GitHub governance | ✅ Done | CODEOWNERS, PR templates in all repos |
+| Licenses per manifesto | ✅ Done | AGPL/MPL/Proprietary correctly assigned |
+| CI/CD workflows | ✅ Done | All repos have GitHub Actions |
+| Version standardization | ✅ Done | All packages at 0.1.0 |
+| `@madfam/core` published | ✅ Done | v0.1.0 on npm |
+| Cross-repo deps eliminated | ✅ Done | madfam-ui, madfam-configs, madfam-analytics dissolved |
+| Shared infrastructure config | ✅ Done | PostgreSQL, Redis, MinIO in solarpunk-foundry |
 
-### 🟠 High Risk (Production Fragile)
-1. Missing environment documentation
-2. No health check integration
-3. Hardcoded URLs/secrets
-4. No API contracts/OpenAPI specs
+### ⏳ Blocked on Infrastructure
 
----
+| Item | Blocker | Next Step |
+|------|---------|-----------|
+| Enclii deployment | Hetzner server access | Deploy bare-metal PaaS |
+| Janua deployment | Enclii | Deploy auth service |
+| All other services | Janua | SSO integration |
+| Domain DNS | Enclii | Point domains to server |
 
-## Phase 1: Foundation (Week 1-2)
-**Goal: Reproducible builds that work anywhere**
+### 📋 Repositories
 
-### 1.1 Lock Files ⏱️ 2 hours
-```bash
-# In each repo root
-pnpm install --lockfile-only
-git add pnpm-lock.yaml
-git commit -m "chore: add pnpm lock file for reproducible builds"
-```
+All 18 repositories are at version 0.1.0:
 
-**Affected repos:** All 12+ repos
+**Layer 1 - Soil (Infrastructure):**
+- `enclii` - Sovereign PaaS (AGPL v3)
+- `janua` - Auth & Revenue (AGPL v3)
 
-### 1.2 Environment Documentation ⏱️ 4 hours
+**Layer 2 - Roots (Data/Intelligence):**
+- `fortuna` - Problem Intelligence (Proprietary)
+- `forgesight` - Manufacturing Costs (Proprietary)
+- `blueprint-harvester` - 3D Model Index (Proprietary)
+- `bloom-scroll` - Slow Web Aggregator (MPL 2.0)
 
-Create `.env.example` in each repo:
+**Layer 3 - Stem (Core Logic):**
+- `geom-core` - Geometry Library (MPL 2.0)
+- `avala` - Learning Verification (AGPL v3)
 
-```bash
-# Template for all repos
-cat > .env.example << 'EOF'
-# ===========================================
-# Required Environment Variables
-# ===========================================
+**Layer 4 - Fruit (Applications):**
+- `sim4d` - Web CAD (MPL 2.0)
+- `forj` - Fabrication Marketplace (Proprietary)
+- `digifab-quoting` - Quoting Engine (Proprietary)
+- `dhanam` - Finance Platform (AGPL v3)
+- `coforma-studio` - Customer Feedback (Proprietary)
+- `electrochem-sim` - Galvana Platform (MPL 2.0)
 
-# Database (uses shared MADFAM PostgreSQL)
-DATABASE_URL=postgresql://madfam:madfam_dev_password@localhost:5432/SERVICE_db
-
-# Redis (uses shared MADFAM Redis)
-REDIS_URL=redis://:redis_dev_password@localhost:6379/INDEX
-
-# Authentication (Janua integration)
-JANUA_API_URL=http://localhost:8001
-JANUA_JWT_SECRET=dev-shared-janua-secret-32chars!!
-
-# Application
-NODE_ENV=development
-PORT=XXXX
-
-# ===========================================
-# Optional / Service-Specific
-# ===========================================
-# Add service-specific variables below
-EOF
-```
-
-### 1.3 Eliminate Cross-Repo Dependencies ⏱️ 8 hours
-
-**Priority order:**
-
-| Repo | Dependency | Action | Effort |
-|------|-----------|--------|--------|
-| digifab-quoting/api | ~~@forgesight/client~~ | ✅ Done | - |
-| digifab-quoting/api | ~~@coforma/client~~ | ✅ Done | - |
-| digifab-quoting/web | @janua/react-sdk | Create integrations/janua/ | 2h |
-| madfam-site/web | @avala/client | Create integrations/avala/ | 1h |
-| madfam-site | @madfam/ui-standalone | Decision needed (see below) | 2h |
-| sim4d | @madfam/geom-core | Git submodule | 1h |
-| Multiple apps | @janua/*-sdk | JWT verification utility | 2h |
-
-**@madfam/ui Decision:**
-- **Option A (Recommended):** Each app uses shadcn/tailwind directly, copy specific components as needed
-- **Option B:** Convert madfam-ui to git submodule
-- **Option C:** True monorepo consolidation
+**Supporting:**
+- `solarpunk-foundry` - Governance & Orchestration
+- `madfam-site` - Corporate Website
+- `primavera3d` - Factory Portfolio
 
 ---
 
-## Phase 2: Containerization (Week 2-3)
-**Goal: Every service runs in Docker**
+## Deployment Sequence
 
-### 2.1 Dockerfile Templates ⏱️ 6 hours
+Per the manifesto, we follow strict ordering:
 
-**Next.js App Template:**
-```dockerfile
-FROM node:20-alpine AS base
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
-FROM base AS deps
-WORKDIR /app
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY apps/web/package.json ./apps/web/
-COPY packages/ ./packages/
-RUN pnpm install --frozen-lockfile
-
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-RUN pnpm build --filter=@scope/web
-
-FROM base AS runner
-WORKDIR /app
-ENV NODE_ENV=production
-COPY --from=builder /app/apps/web/.next/standalone ./
-COPY --from=builder /app/apps/web/.next/static ./apps/web/.next/static
-COPY --from=builder /app/apps/web/public ./apps/web/public
-EXPOSE 3000
-CMD ["node", "apps/web/server.js"]
+### Phase 1: Foundation (Current Phase)
+```
+1. Enclii      → Bare-metal infrastructure
+2. Janua       → SSO + Revenue management
+3. Dhanam      → Internal financial tracking
+4. Coforma     → Waitlist/feedback capture
 ```
 
-**NestJS API Template:**
-```dockerfile
-FROM node:20-alpine AS base
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
-FROM base AS builder
-WORKDIR /app
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY apps/api/package.json ./apps/api/
-COPY packages/ ./packages/
-RUN pnpm install --frozen-lockfile
-COPY . .
-RUN pnpm build --filter=@scope/api
-
-FROM node:20-alpine AS runner
-WORKDIR /app
-COPY --from=builder /app/apps/api/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-EXPOSE 8000
-CMD ["node", "dist/main.js"]
+### Phase 2: Intelligence
+```
+5. Fortuna     → Market signal scraping
+6. ForgeSight  → Cost data scraping
+7. BlueprintTube → 3D model indexing
+8. BloomScroll → Community building
 ```
 
-### 2.2 Update docker-compose Files ⏱️ 4 hours
+### Phase 3: Core Engines
+```
+9. geom-core   → Publish geometry library
+10. AVALA      → Verification platform
+11. Sim4D      → CAD editor (alpha)
+```
 
-Each repo's docker-compose.yml should:
-1. Use the new Dockerfile
-2. Connect to `madfam-shared-network`
-3. Reference shared infrastructure by container name
-4. Include health checks
+### Phase 4: Commerce
+```
+12. Cotiza     → Pricing engine
+13. Forj       → Marketplace
+14. Sim4D      → CAD editor (beta)
+```
 
-```yaml
-services:
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      DATABASE_URL: postgresql://madfam:madfam_dev_password@madfam-postgres-shared:5432/service_db
-      REDIS_URL: redis://:redis_dev_password@madfam-redis-shared:6379/INDEX
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    networks:
-      - madfam-shared-network
-
-networks:
-  madfam-shared-network:
-    external: true
+### Phase 5: Frontier
+```
+15. Galvana    → Electrochemistry (when revenue stable)
 ```
 
 ---
 
-## Phase 3: CI/CD Pipeline (Week 3-4)
-**Goal: Automated testing and deployment**
+## Shared Infrastructure
 
-### 3.1 GitHub Actions Workflow ⏱️ 6 hours
+All services connect via `madfam-shared-network`:
 
-Create `.github/workflows/ci.yml` template:
+| Service | Container | Port | Purpose |
+|---------|-----------|------|---------|
+| PostgreSQL | madfam-postgres-shared | 5432 | Primary database |
+| Redis | madfam-redis-shared | 6379 | Caching, sessions |
+| MinIO | madfam-minio-shared | 9000/9001 | Object storage |
 
-```yaml
-name: CI
-
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
-
-jobs:
-  lint-and-typecheck:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 9
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm lint
-      - run: pnpm typecheck
-
-  test:
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:15-alpine
-        env:
-          POSTGRES_USER: test
-          POSTGRES_PASSWORD: test
-          POSTGRES_DB: test
-        ports:
-          - 5432:5432
-      redis:
-        image: redis:7-alpine
-        ports:
-          - 6379:6379
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm test
-        env:
-          DATABASE_URL: postgresql://test:test@localhost:5432/test
-
-  build:
-    runs-on: ubuntu-latest
-    needs: [lint-and-typecheck, test]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-
-  docker:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v4
-      - uses: docker/setup-buildx-action@v3
-      - run: docker build -t ${{ github.repository }}:${{ github.sha }} .
-```
-
-### 3.2 Deployment Pipeline ⏱️ 8 hours
-
-Options by service type:
-
-| Service Type | Recommended Platform | Reason |
-|--------------|---------------------|--------|
-| Next.js frontend | Vercel / Cloudflare Pages | Zero-config, edge functions |
-| NestJS/Python API | Hetzner + Docker | Cost-effective, sovereign |
-| Static sites | GitHub Pages / Cloudflare | Free, fast |
+**Redis Database Allocation:**
+- DB 0: Janua (sessions)
+- DB 1: Forgesight (cache)
+- DB 2: Digifab-quoting (cache)
+- DB 3: Dhanam (cache)
+- DB 4: Sim4D (collaboration)
+- DB 5-7: Reserved
 
 ---
 
-## Phase 4: API Contracts (Week 4-5)
-**Goal: Machine-readable API documentation**
+## Package Strategy
 
-### 4.1 OpenAPI Generation ⏱️ 4 hours
+### Published to npm
+- `@madfam/core` - Organizational constants (brand, locales, currencies, events, products, legal)
 
-**For NestJS APIs (using @nestjs/swagger):**
-```typescript
-// main.ts
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+### Not Published (Internal)
+- Each app owns its own UI components (shadcn/tailwind)
+- Each app owns its own analytics implementation
+- Each app owns its own config
 
-const config = new DocumentBuilder()
-  .setTitle('Service Name API')
-  .setVersion('1.0')
-  .addBearerAuth()
-  .build();
+### Anti-Patterns Avoided
+- ❌ No shared UI packages across repos
+- ❌ No shared "config" packages
+- ❌ No cross-repo npm dependencies
+- ❌ No private npm registry (Verdaccio)
 
-const document = SwaggerModule.createDocument(app, config);
-SwaggerModule.setup('api/docs', app, document);
+### Patterns Used
+- ✅ HTTP APIs as contracts between services
+- ✅ Each service owns its dependencies completely
+- ✅ Templates in solarpunk-foundry for reference implementations
+- ✅ `@madfam/core` for organizational decisions only
 
-// Export OpenAPI spec
-import { writeFileSync } from 'fs';
-writeFileSync('./openapi.json', JSON.stringify(document, null, 2));
-```
+---
 
-**For Python APIs (FastAPI already does this):**
-```python
-# Already available at /docs and /openapi.json
-```
-
-### 4.2 Client Generation ⏱️ 2 hours
+## Local Development
 
 ```bash
-# Generate TypeScript client from OpenAPI
-npx openapi-typescript-codegen \
-  --input http://localhost:8100/openapi.json \
-  --output src/generated/forgesight-client \
-  --client fetch
+# Start shared infrastructure
+cd solarpunk-foundry
+docker compose up -d
+
+# Start a specific service
+cd ../janua
+pnpm install
+pnpm dev
+
+# Or use the madfam CLI
+./madfam start        # Core ecosystem
+./madfam full         # Full ecosystem
+./madfam status       # Check status
+./madfam stop         # Stop all
 ```
 
 ---
 
-## Phase 5: Observability (Week 5-6)
-**Goal: Know when things break before users do**
+## Next Steps (When Server Ready)
 
-### 5.1 Health Endpoints ⏱️ 4 hours
-
-Standardize across all services:
-
-```
-GET /health          → {"status": "healthy", "version": "1.0.0"}
-GET /health/ready    → {"status": "ready", "checks": {...}}
-GET /health/live     → {"status": "alive"}
-```
-
-### 5.2 Structured Logging ⏱️ 4 hours
-
-```typescript
-// Use pino or winston consistently
-logger.info({ 
-  event: 'request_completed',
-  duration_ms: 45,
-  status: 200,
-  path: '/api/v1/quotes'
-});
-```
-
-### 5.3 Error Tracking ⏱️ 2 hours
-
-Sentry is already in several apps. Standardize:
-- Same DSN format across apps
-- Source maps upload in CI
-- Release tracking
+1. **Deploy Enclii** on Hetzner bare-metal
+2. **Configure DNS** for all domains
+3. **Deploy Janua** with production secrets
+4. **Migrate** local docker-compose to production
+5. **Enable HTTPS** via Let's Encrypt
+6. **Deploy remaining services** per sequence
 
 ---
 
-## Phase 6: Security Hardening (Week 6-7)
-**Goal: Production-safe defaults**
+## Documentation Index
 
-### 6.1 Security Headers ⏱️ 2 hours
-
-Standardize Next.js security headers:
-
-```typescript
-// next.config.js - copy to all Next.js apps
-const securityHeaders = [
-  { key: 'X-DNS-Prefetch-Control', value: 'on' },
-  { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains' },
-  { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
-  { key: 'X-Content-Type-Options', value: 'nosniff' },
-  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-];
-```
-
-### 6.2 Secrets Management ⏱️ 4 hours
-
-- Move from .env files to proper secrets manager
-- Options: Doppler, Infisical, or Hetzner's secret store
-- Never commit secrets, even in .env.example
-
-### 6.3 Dependency Auditing ⏱️ 2 hours
-
-Add to CI pipeline:
-```yaml
-- run: pnpm audit --audit-level=high
-```
+| Document | Purpose |
+|----------|---------|
+| `README.md` | Manifesto & architecture |
+| `docs/PORT_ALLOCATION.md` | Service port assignments |
+| `docs/DOGFOODING_GUIDE.md` | Internal usage patterns |
+| `docs/JANUA_INTEGRATION.md` | Auth integration guide |
+| `packages/core/README.md` | @madfam/core usage |
+| `templates/README.md` | Reference implementations |
 
 ---
 
-## Phase 7: Testing Infrastructure (Week 7-8)
-**Goal: Confidence in changes**
-
-### 7.1 Unit Test Coverage ⏱️ 8 hours
-
-Set minimum thresholds:
-```json
-// jest.config.js
-{
-  "coverageThreshold": {
-    "global": {
-      "branches": 70,
-      "functions": 70,
-      "lines": 70
-    }
-  }
-}
-```
-
-### 7.2 E2E Tests ⏱️ 8 hours
-
-Playwright is installed but not configured:
-```typescript
-// playwright.config.ts
-export default defineConfig({
-  testDir: './e2e',
-  webServer: {
-    command: 'pnpm dev',
-    port: 3000,
-    reuseExistingServer: !process.env.CI,
-  },
-});
-```
-
-### 7.3 Integration Tests ⏱️ 4 hours
-
-Test service-to-service communication:
-```typescript
-describe('Cotiza → Forgesight Integration', () => {
-  it('fetches material pricing', async () => {
-    const forgesight = new ForgesightClient();
-    const pricing = await forgesight.getQuotePricing({...});
-    expect(pricing.totalCost).toBeGreaterThan(0);
-  });
-});
-```
-
----
-
-## Summary: Effort Estimation
-
-| Phase | Effort | Priority | Dependencies |
-|-------|--------|----------|--------------|
-| 1. Foundation | 14 hours | 🔴 Critical | None |
-| 2. Containerization | 10 hours | 🔴 Critical | Phase 1 |
-| 3. CI/CD | 14 hours | 🔴 Critical | Phase 1, 2 |
-| 4. API Contracts | 6 hours | 🟠 High | Phase 1 |
-| 5. Observability | 10 hours | 🟠 High | Phase 2 |
-| 6. Security | 8 hours | 🟠 High | Phase 1 |
-| 7. Testing | 20 hours | 🟡 Medium | Phase 1, 3 |
-
-**Total: ~82 hours (2-3 weeks focused work)**
-
----
-
-## Quick Wins (Do This Week)
-
-1. **Generate lock files** - 2 hours, massive impact
-2. **Create .env.example files** - 4 hours, unblocks onboarding
-3. **Finish Cotiza dependency migration** - 2 hours (web app)
-4. **Document port allocations** - 1 hour (already done in PORT_ALLOCATION.md)
-
----
-
-## Anti-Patterns to Avoid
-
-❌ Don't add Verdaccio or private npm registry
-❌ Don't create "shared" packages that everything depends on
-❌ Don't use `npm ci` without lock files
-❌ Don't hardcode URLs - always use environment variables
-❌ Don't skip health checks in Docker
-❌ Don't deploy without CI/CD pipeline
-
-✅ Each service owns its dependencies completely
-✅ HTTP APIs are the contract between services
-✅ Lock files checked into git
-✅ Environment variables documented in .env.example
-✅ Every service has /health endpoint
-✅ Automated tests run on every PR
-
----
-
-*This roadmap aligns with the Solarpunk Manifesto: sovereign, self-contained services with clear contracts and reproducible builds.*
+*This roadmap reflects actual ecosystem state. Updated manually after significant changes.*

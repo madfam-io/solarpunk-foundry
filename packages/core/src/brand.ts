@@ -1,5 +1,5 @@
 /**
- * @solarpunk/core - Brand Identity
+ * @madfam/core - Brand Identity
  *
  * Authoritative brand constants for the MADFAM/Solarpunk ecosystem.
  * These values are organizational decisions - apps MUST use these for brand consistency.

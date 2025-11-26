@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-This audit analyzes the integration status between `geom-core` (unified geometry engine) and `sim4d` (BrepFlow CAD application) within the MADFAM ecosystem. The goal is to ensure sim4d can pull all geometric operations from geom-core with **zero-lag execution**.
+This audit analyzes the integration status between `geom-core` (unified geometry engine) and `sim4d` (Sim4D CAD application) within the MADFAM ecosystem. The goal is to ensure sim4d can pull all geometric operations from geom-core with **zero-lag execution**.
 
 ### Key Findings
 
@@ -50,7 +50,7 @@ geom-core/
 - ✅ Complexity estimation for smart routing
 - ✅ WebSocket support for real-time remote compute
 
-### 1.2 sim4d (BrepFlow - `brepflow`)
+### 1.2 sim4d (Sim4D - `sim4d`)
 
 **Purpose**: Web-first, node-based parametric CAD on exact B-Rep/NURBS.
 
@@ -228,7 +228,7 @@ Heavy (>1s):          → Route to remote GPU compute
 | Gap | Impact | Priority |
 |-----|--------|----------|
 | **No dependency link** | sim4d cannot consume geom-core | 🔴 Critical |
-| **Different package ecosystems** | @madfam vs @brepflow namespaces | 🔴 Critical |
+| **Different package ecosystems** | @madfam vs @sim4d namespaces | 🔴 Critical |
 | **Missing I/O in geom-core** | STEP/STL/IGES export needed | 🟡 High |
 | **Missing assembly in geom-core** | Pattern/mate operations needed | 🟡 High |
 | **Type definition divergence** | ShapeHandle structures differ | 🟡 Medium |
@@ -248,7 +248,7 @@ interface ShapeHandle {
 }
 ```
 
-**sim4d ShapeHandle** (from @brepflow/types):
+**sim4d ShapeHandle** (from @sim4d/types):
 ```typescript
 interface ShapeHandle {
   id: string;
@@ -300,7 +300,7 @@ SDK → Complexity Check → Route Decision → Local/Remote → Result
 | 2.2 | Create GeomCoreAdapter in engine-occt | 2 days |
 | 2.3 | Map sim4d operation names to geom-core methods | 1 day |
 | 2.4 | Implement worker bridge for GeomCoreSDK | 2 days |
-| 2.5 | Wire up zero-lag routing in BrepFlow | 1 day |
+| 2.5 | Wire up zero-lag routing in Sim4D | 1 day |
 
 ### Phase 3: Feature Parity Validation
 
@@ -334,14 +334,14 @@ SDK → Complexity Check → Route Decision → Local/Remote → Result
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      sim4d (BrepFlow)                        │
+│                      sim4d (Sim4D)                        │
 ├─────────────────────────────────────────────────────────────┤
 │  Studio │ Viewport │ Nodes │ CLI                            │
 ├─────────────────────────────────────────────────────────────┤
 │                   engine-core (Adapter Layer)                │
 │  ┌─────────────────────────────────────────────────────────┐│
 │  │  GeomCoreAdapter                                        ││
-│  │  - Maps BrepFlow operations to geom-core SDK            ││
+│  │  - Maps Sim4D operations to geom-core SDK            ││
 │  │  - Handles worker message translation                   ││
 │  │  - Manages shape handle conversion                      ││
 │  └─────────────────────────────────────────────────────────┘│
@@ -372,7 +372,7 @@ import {
   type GeomCoreSDK,
   type ShapeHandle as GeomCoreShape
 } from '@madfam/geom-core';
-import type { ShapeHandle as BrepFlowShape } from '@brepflow/types';
+import type { ShapeHandle as Sim4DShape } from '@sim4d/types';
 
 export class GeomCoreAdapter {
   private sdk: GeomCoreSDK;
@@ -382,8 +382,8 @@ export class GeomCoreAdapter {
     this.sdk = createBrowserSDK(engine);
   }
 
-  // Adapt BrepFlow operation to geom-core
-  async execute(operation: string, params: unknown): Promise<BrepFlowShape> {
+  // Adapt Sim4D operation to geom-core
+  async execute(operation: string, params: unknown): Promise<Sim4DShape> {
     const mapped = this.mapOperation(operation);
     const result = await this.sdk[mapped.method](mapped.params);
     
@@ -405,7 +405,7 @@ export class GeomCoreAdapter {
     return { method: mapping[op] || op, params };
   }
 
-  private convertHandle(gcShape: GeomCoreShape): BrepFlowShape {
+  private convertHandle(gcShape: GeomCoreShape): Sim4DShape {
     return {
       id: gcShape.id,
       type: gcShape.type,
