@@ -116,15 +116,39 @@ services:
       mc mb --ignore-existing shared/cotiza-stl-files;
       mc mb --ignore-existing shared/forgesight-vendor-data;
       mc mb --ignore-existing shared/blueprint-harvester-models;
-      mc policy set download shared/janua-uploads;
-      mc policy set download shared/cotiza-stl-files;
-      mc policy set download shared/forgesight-vendor-data;
-      mc policy set download shared/blueprint-harvester-models;
+      mc mb --ignore-existing shared/dhanam-uploads;
+      mc mb --ignore-existing shared/avala-uploads;
+      mc mb --ignore-existing shared/forj-uploads;
+      mc anonymous set download shared/janua-uploads;
+      mc anonymous set download shared/cotiza-stl-files;
+      mc anonymous set download shared/forgesight-vendor-data;
+      mc anonymous set download shared/blueprint-harvester-models;
+      mc anonymous set download shared/dhanam-uploads;
+      mc anonymous set download shared/avala-uploads;
+      mc anonymous set download shared/forj-uploads;
       echo 'MinIO buckets provisioned successfully';
       exit 0;
       "
     networks:
       - madfam-shared-network
+
+  # ==========================================
+  # MailHog - Email Testing (Development)
+  # ==========================================
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: madfam-mailhog
+    ports:
+      - "1025:1025" # SMTP
+      - "8025:8025" # Web UI
+    networks:
+      - madfam-shared-network
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 # ==========================================
 # Networks

@@ -30,6 +30,9 @@ CREATE DATABASE fortuna_db OWNER madfam;
 -- Blueprint Harvester
 CREATE DATABASE blueprint_db OWNER madfam;
 
+-- Forj Decentralized Fabrication
+CREATE DATABASE forj_db OWNER madfam;
+
 -- Grant all privileges
 GRANT ALL PRIVILEGES ON DATABASE madfam TO madfam;
 GRANT ALL PRIVILEGES ON DATABASE janua_db TO madfam;
@@ -39,6 +42,7 @@ GRANT ALL PRIVILEGES ON DATABASE dhanam_db TO madfam;
 GRANT ALL PRIVILEGES ON DATABASE avala_db TO madfam;
 GRANT ALL PRIVILEGES ON DATABASE fortuna_db TO madfam;
 GRANT ALL PRIVILEGES ON DATABASE blueprint_db TO madfam;
+GRANT ALL PRIVILEGES ON DATABASE forj_db TO madfam;
 
 -- Extensions for each database
 \c madfam
@@ -70,5 +74,9 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 \c blueprint_db
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+\c forj_db
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
