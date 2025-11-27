@@ -92,7 +92,7 @@ We do not build "SaaS"; we build tools to run our own operations first.
 | **Dhanam** | Finance | `madfam-io` | [dhan.am](https://dhan.am) | [dhanam](https://github.com/madfam-io/dhanam) | **AGPL v3** | Trust in financial code. Open Core protects connectors. |
 | **BloomScroll**| Media | `madfam-io` | TBD | [bloom-scroll](https://github.com/madfam-io/bloom-scroll) | **MPL 2.0** | Ethos & Community building. |
 | **AVALA** | EdTech | `madfam-io` | TBD | [avala](https://github.com/madfam-io/avala) | **AGPL v3** | Transparent verification. |
-| **geom-core** | Science | `madfam-io` | TBD | [geom-core](https://github.com/madfam-io/geom-core) | **MPL 2.0** | The geometry standard. |
+| **geom-core** | Science | `madfam-io` | TBD | [geom-core](https://github.com/madfam-io/geom-core) | **Apache 2.0** | The geometry standard. |
 | **Galvana** | Science | `madfam-io` | TBD | [electrochem-sim](https://github.com/madfam-io/electrochem-sim) | **MPL 2.0** | Open Science collaboration. |
 | **Sim4D (Community)**| Making | `madfam-io` | [sim4d.io](https://sim4d.io) | [sim4d](https://github.com/madfam-io/sim4d) | **MPL 2.0** | The tool (without the market). |
 | **Fortuna** | Intel | `aureo-labs` | [fortuna.tube](https://fortuna.tube) | [fortuna](https://github.com/madfam-io/fortuna) | **Proprietary**| The "Edge" (Market Gaps). |
@@ -101,6 +101,14 @@ We do not build "SaaS"; we build tools to run our own operations first.
 | **Forj** | Commerce | `aureo-labs` | [forj.design](https://forj.design) | [forj](https://github.com/madfam-io/forj) | **Proprietary**| The Revenue Engine. |
 | **Cotiza Studio**| Making | `aureo-labs` | [cotiza.studio](https://cotiza.studio) | [digifab-quoting](https://github.com/madfam-io/digifab-quoting) | **Proprietary**| The Pricing Logic. |
 | **Coforma Studio**| Ops | `aureo-labs` | [coforma.studio](https://coforma.studio) | [coforma-studio](https://github.com/madfam-io/coforma-studio) | **Proprietary**| The Customer Data. |
+
+### Business & Corporate Websites
+
+| Solution | Domain | GitHub Org | Website | Repository | License | Strategic Purpose |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **MADFAM Site** | Corp | `madfam-io` | [madfam.io](https://madfam.io) | [madfam-site](https://github.com/madfam-io/madfam-site) | **Proprietary** | Corporate presence & brand. |
+| **Aureo Labs** | Corp | `madfam-io` | [aureolabs.dev](https://aureolabs.dev) | [aureo-labs](https://github.com/madfam-io/aureo-labs) | **Proprietary** | Product showcase & demos. |
+| **Primavera3D** | Corp | `madfam-io` | [primavera3d.com](https://primavera3d.com) | [primavera3d](https://github.com/madfam-io/primavera3d) | **Proprietary** | Factory portfolio & services. |
 
 ---
 
