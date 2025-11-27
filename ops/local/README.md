@@ -9,10 +9,13 @@ Complete local development environment for the MADFAM ecosystem.
 cd ~/labspace/solarpunk-foundry/ops/local
 docker compose -f docker-compose.shared.yml up -d
 
-# 2. Verify all services are running
+# 2. (Optional) Start observability stack (PostHog)
+./start-observability.sh
+
+# 3. Verify all services are running
 docker ps
 
-# 3. Start individual apps (choose what you need)
+# 4. Start individual apps (choose what you need)
 cd ~/labspace/janua && docker compose -f docker-compose.dev.yml up -d
 cd ~/labspace/digifab-quoting && docker compose -f docker-compose.dev.yml up -d
 cd ~/labspace/dhanam && docker compose -f docker-compose.dev.yml up -d
@@ -30,6 +33,44 @@ cd ~/labspace/forj && docker compose -f docker-compose.dev.yml up -d
 | MinIO Console | madfam-minio-shared | 9001 | http://localhost:9001 |
 | MailHog SMTP | madfam-mailhog | 1025 | smtp://localhost:1025 |
 | MailHog UI | madfam-mailhog | 8025 | http://localhost:8025 |
+
+## Observability Stack (Optional)
+
+| Service | Container | Port | URL |
+|---------|-----------|------|-----|
+| PostHog | madfam-posthog | 8100 | http://localhost:8100 |
+| PostHog ClickHouse | madfam-posthog-clickhouse | - | Internal |
+| PostHog Kafka | madfam-posthog-kafka | - | Internal |
+| PostHog Redis | madfam-posthog-redis | - | Internal |
+| PostHog PostgreSQL | madfam-posthog-postgres | - | Internal |
+
+### Starting Observability
+
+```bash
+./start-observability.sh
+```
+
+### First-Time PostHog Setup
+
+1. Open http://localhost:8100
+2. Create your admin account
+3. Copy your Project API Key
+4. Add to your apps' `.env` files:
+
+```env
+NEXT_PUBLIC_POSTHOG_KEY=phc_your_project_key
+NEXT_PUBLIC_POSTHOG_HOST=http://localhost:8100
+```
+
+### Using @madfam/analytics
+
+Install the shared analytics package:
+
+```bash
+pnpm add @madfam/analytics
+```
+
+See `packages/analytics/README.md` for usage instructions.
 
 ## Application Ports
 
