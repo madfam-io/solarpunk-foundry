@@ -33,12 +33,12 @@ declare const ecosystemLayers: {
 };
 type EcosystemLayer = keyof typeof ecosystemLayers;
 declare const licenseTypes: {
-    readonly 'AGPL-3.0': {
+    readonly "AGPL-3.0": {
         readonly name: "GNU Affero General Public License v3.0";
         readonly openSource: true;
         readonly purpose: "Prevents cloud capture, ensures source availability";
     };
-    readonly 'MPL-2.0': {
+    readonly "MPL-2.0": {
         readonly name: "Mozilla Public License 2.0";
         readonly openSource: true;
         readonly purpose: "File-level copyleft, allows proprietary integration";
@@ -64,7 +64,7 @@ interface Product {
     /** GitHub repository name */
     repo: string;
     /** GitHub organization */
-    githubOrg: 'madfam-io' | 'aureo-labs';
+    githubOrg: "madfam-io" | "aureo-labs";
     /** License type */
     license: LicenseType;
     /** Default port for local development */
@@ -170,7 +170,7 @@ declare const products: {
         readonly name: "AVALA";
         readonly description: "The Human Standard. Applied learning verification.";
         readonly layer: "stem";
-        readonly domain: "avala.mx";
+        readonly domain: "avala.studio";
         readonly repo: "avala";
         readonly githubOrg: "madfam-io";
         readonly license: "AGPL-3.0";

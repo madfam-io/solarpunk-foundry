@@ -411,7 +411,7 @@ var licenseTypes = {
     openSource: true,
     purpose: "File-level copyleft, allows proprietary integration"
   },
-  "Proprietary": {
+  Proprietary: {
     name: "Proprietary",
     openSource: false,
     purpose: "Commercial protection for competitive advantage"
@@ -518,7 +518,7 @@ var products = {
     name: "AVALA",
     description: "The Human Standard. Applied learning verification.",
     layer: "stem",
-    domain: "avala.mx",
+    domain: "avala.studio",
     repo: "avala",
     githubOrg: "madfam-io",
     license: "AGPL-3.0",
