@@ -21,7 +21,8 @@ Central registry of port assignments for all MADFAM applications and services.
 | Port | App | Repository | Description |
 |------|-----|------------|-------------|
 | 3000 | madfam-site | madfam-site | Marketing website |
-| 3001 | janua-web | janua | Auth dashboard & admin |
+| 3001 | janua-landing | janua | Marketing & landing page |
+| 3002 | janua-dashboard | janua | Auth dashboard & admin UI |
 | 3010 | avala-web | avala | Competency training platform |
 | 3020 | forgesight-web | forgesight | Business analytics dashboard |
 | 3030 | cotiza-web | digifab-quoting | Manufacturing quoting app |
@@ -36,7 +37,7 @@ Central registry of port assignments for all MADFAM applications and services.
 | 3094 | primavera3d-docs | primavera3d | Documentation site |
 | 3095 | blueprint-harvester | blueprint-harvester | Data harvesting tool |
 
-**Reserved**: 3002-3009, 3071-3079, 3096-3099
+**Reserved**: 3003-3009, 3071-3079, 3096-3099
 
 ---
 
@@ -227,7 +228,8 @@ All `.env.example` files have been updated to match this registry:
 | App | Port | Status |
 |-----|------|--------|
 | madfam-site | 3000 | ✅ Updated |
-| janua-web | 3001 | ✅ Updated |
+| janua-landing | 3001 | ✅ Updated |
+| janua-dashboard | 3002 | ⏳ Pending |
 | avala-web | 3010 | ✅ Updated |
 | forgesight-web | 3020 | ✅ Updated |
 | cotiza-web | 3030 | ✅ Updated |
@@ -251,6 +253,10 @@ All `.env.example` files have been updated to match this registry:
 ---
 
 ## Changelog
+
+### 2025-12-01
+- Split janua-web into janua-landing (3001) and janua-dashboard (3002)
+- janua-dashboard assigned port 3002 for auth dashboard & admin UI
 
 ### 2025-11-29
 - Initial port registry created
