@@ -235,8 +235,8 @@ start_core_services() {
     done
 
     # Health checks
-    wait_for_health "http://localhost:8001/health" "Janua API" 45 || true
-    wait_for_health "http://localhost:8200/health" "Forgesight API" 30 || true
+    wait_for_health "http://localhost:4100/health" "Janua API" 45 || true
+    wait_for_health "http://localhost:4300/health" "ForgeSight API" 30 || true
     wait_for_health "http://localhost:3000/api/health" "MADFAM Site" 45 || true
 }
 
@@ -278,18 +278,18 @@ print_summary() {
         echo "  ✅ $service"
     done
     echo ""
-    echo -e "${BLUE}Service URLs:${NC}"
+    echo -e "${BLUE}Service URLs (per PORT_ALLOCATION.md):${NC}"
     echo -e "${MAGENTA}Core Services${NC}"
-    echo "  🌐 MADFAM Site:        http://localhost:3000"
-    echo "  🔐 Janua Auth:         http://localhost:8001"
-    echo "  📊 Forgesight:         http://localhost:8200 (API)"
-    echo "  🛠️  Digifab Quoting:    http://localhost:8300 (API)"
+    echo "  🌐 MADFAM Site:        http://localhost:3000 (Legacy)"
+    echo "  🔐 Janua Auth:         http://localhost:4100 (4100-4199)"
+    echo "  📊 Enclii PaaS:        http://localhost:4200 (4200-4299)"
+    echo "  📊 ForgeSight:         http://localhost:4300 (4300-4399)"
+    echo "  📈 Fortuna:            http://localhost:4400 (4400-4499)"
+    echo "  🛠️  Cotiza Quoting:     http://localhost:4500 (4500-4599)"
     echo ""
     echo -e "${MAGENTA}Platform Apps${NC}"
-    echo "  💵 Dhanam:             http://localhost:8500 (API) / http://localhost:3030 (Web)"
-    echo "  📈 Fortuna:            http://localhost:8600"
-    echo "  🔧 BrepFlow Studio:    http://localhost:5173"
-    echo "  🔧 BrepFlow Marketing: http://localhost:3040"
+    echo "  💵 Dhanam:             http://localhost:4700 (4700-4799)"
+    echo "  🔧 Sim4D Studio:       http://localhost:4800 (4800-4899)"
     echo ""
     echo -e "${MAGENTA}Portfolio Sites${NC}"
     echo "  🎨 Aureo Labs:         http://localhost:3010"
@@ -399,11 +399,12 @@ cmd_status() {
     printf "  %-20s " "Redis:"
     docker exec madfam-redis-shared redis-cli -a redis_dev_password ping >/dev/null 2>&1 && echo -e "${GREEN}● ONLINE${NC}" || echo -e "${RED}● OFFLINE${NC}"
 
-    # Services
-    check_health "Janua API" "http://localhost:8001/health"
-    check_health "Forgesight API" "http://localhost:8200/health"
+    # Services (per PORT_ALLOCATION.md)
+    check_health "Janua API" "http://localhost:4100/health"
+    check_health "Enclii API" "http://localhost:4200/health"
+    check_health "ForgeSight API" "http://localhost:4300/health"
     check_health "MADFAM Site" "http://localhost:3000/api/health"
-    check_health "Digifab API" "http://localhost:8300/health"
+    check_health "Cotiza API" "http://localhost:4500/health"
 }
 
 cmd_logs() {

@@ -70,7 +70,7 @@ services:
     container_name: janua-api
     restart: always
     ports:
-      - "${JANUA_PORT}:8000"
+      - "${JANUA_PORT}:4100"
     environment:
       NODE_ENV: production
       DATABASE_URL: ${JANUA_DATABASE_URL}
@@ -90,7 +90,7 @@ services:
       redis-shared:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:4100/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -125,7 +125,7 @@ services:
     container_name: forgesight-api
     restart: always
     ports:
-      - "${FORGESIGHT_PORT}:8000"
+      - "${FORGESIGHT_PORT}:4300"
     environment:
       NODE_ENV: production
       DATABASE_URL: ${FORGESIGHT_DATABASE_URL}
@@ -145,7 +145,7 @@ services:
       forgesight-opensearch:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:4300/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -193,7 +193,7 @@ services:
     container_name: cotiza-api
     restart: always
     ports:
-      - "${COTIZA_API_PORT}:4000"
+      - "${COTIZA_API_PORT}:4500"
     environment:
       NODE_ENV: production
       DATABASE_URL: ${COTIZA_DATABASE_URL}
@@ -213,9 +213,9 @@ services:
       SMTP_FROM: ${SMTP_FROM}
       LOG_LEVEL: ${LOG_LEVEL}
       SENTRY_DSN: ${SENTRY_DSN}
-      # Cross-service URLs
-      JANUA_API_URL: http://janua-api:8001
-      FORGESIGHT_API_URL: http://forgesight-api:8100
+      # Cross-service URLs (standardized ports per PORT_ALLOCATION.md)
+      JANUA_API_URL: http://janua-api:4100
+      FORGESIGHT_API_URL: http://forgesight-api:4300
     depends_on:
       postgres-shared:
         condition: service_healthy
@@ -226,7 +226,7 @@ services:
       janua-api:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4000/api/docs"]
+      test: ["CMD", "curl", "-f", "http://localhost:4500/api/docs"]
       interval: 30s
       timeout: 10s
       retries: 3

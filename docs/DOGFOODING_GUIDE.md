@@ -42,40 +42,38 @@ cd ~/labspace/solarpunk-foundry/ops/bin
 
 ## Service Port Map
 
-| Service | Port | URL |
-|---------|------|-----|
-| **Shared Infrastructure** |||
-| PostgreSQL | 5432 | `madfam-postgres-shared:5432` |
-| Redis | 6379 | `madfam-redis-shared:6379` |
-| MinIO API | 9000 | `madfam-minio-shared:9000` |
-| MinIO Console | 9001 | http://localhost:9001 |
-| **Identity (Janua)** |||
-| Janua API | 8001 | http://localhost:8001 |
-| Janua Admin | 3004 | http://localhost:3004 |
-| Janua Docs | 3005 | http://localhost:3005 |
-| **Quoting (Cotiza)** |||
-| Cotiza API | 8200 | http://localhost:8200 |
-| Cotiza Web | 3030 | http://localhost:3030 |
-| Cotiza Worker | 8201 | http://localhost:8201 |
-| **Vendor Intel (Forgesight)** |||
-| Forgesight API | 8100 | http://localhost:8100 |
-| Forgesight Admin | 3012 | http://localhost:3012 |
-| OpenSearch | 9200 | http://localhost:9200 |
-| **Business Sites** |||
-| MADFAM Site (prod) | 3000 | http://localhost:3000 |
-| MADFAM Site (dev) | 3001 | http://localhost:3001 |
-| Aureo Labs (prod) | 3010 | http://localhost:3010 |
-| Aureo Labs (dev) | 3011 | http://localhost:3011 |
-| Primavera3D (prod) | 3020 | http://localhost:3020 |
-| Primavera3D (dev) | 3021 | http://localhost:3021 |
-| **CAD (Sim4D)** |||
-| Studio | 5173 | http://localhost:5173 |
-| Marketing | 3040 | http://localhost:3040 |
-| Collaboration WS | 8081 | ws://localhost:8081 |
-| **Problem Intel (Fortuna)** |||
-| Fortuna API | 8110 | http://localhost:8110 |
-| Fortuna NLP | 8111 | http://localhost:8111 |
-| OpenSearch | 9201 | http://localhost:9201 |
+| Service | Port | URL | Block |
+|---------|------|-----|-------|
+| **Shared Infrastructure** ||||
+| PostgreSQL | 5432 | `madfam-postgres:5432` | Infra |
+| Redis | 6379 | `madfam-redis:6379` | Infra |
+| MinIO API | 9000 | `madfam-minio:9000` | Infra |
+| MinIO Console | 9001 | http://localhost:9001 | Infra |
+| **Identity (Janua)** | | | 4100-4199 |
+| Janua API | 4100 | http://localhost:4100 | |
+| Janua Dashboard | 4101 | http://localhost:4101 | |
+| Janua Admin | 4102 | http://localhost:4102 | |
+| Janua Docs | 4103 | http://localhost:4103 | |
+| **Platform (Enclii)** | | | 4200-4299 |
+| Enclii API | 4200 | http://localhost:4200 | |
+| Enclii UI | 4201 | http://localhost:4201 | |
+| **Data (ForgeSight)** | | | 4300-4399 |
+| ForgeSight API | 4300 | http://localhost:4300 | |
+| ForgeSight Web | 4301 | http://localhost:4301 | |
+| **Intelligence (Fortuna)** | | | 4400-4499 |
+| Fortuna API | 4400 | http://localhost:4400 | |
+| Fortuna Web | 4401 | http://localhost:4401 | |
+| **Quoting (Cotiza)** | | | 4500-4599 |
+| Cotiza API | 4500 | http://localhost:4500 | |
+| Cotiza Web | 4501 | http://localhost:4501 | |
+| **Finance (Dhanam)** | | | 4700-4799 |
+| Dhanam API | 4700 | http://localhost:4700 | |
+| Dhanam Web | 4701 | http://localhost:4701 | |
+| **CAD (Sim4D)** | | | 4800-4899 |
+| Sim4D API | 4800 | http://localhost:4800 | |
+| Sim4D Studio | 4801 | http://localhost:4801 | |
+
+> **Note**: See `PORT_ALLOCATION.md` for the complete port registry
 
 ---
 

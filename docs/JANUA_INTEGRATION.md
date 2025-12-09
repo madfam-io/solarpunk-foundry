@@ -66,9 +66,10 @@ npm link ../janua/packages/nextjs-sdk
 
 #### Environment Variables
 ```env
-JANUA_API_URL=http://localhost:8001
+# Port 4100 per PORT_ALLOCATION.md (Janua block: 4100-4199)
+JANUA_API_URL=http://localhost:4100
 JANUA_JWT_SECRET=your-shared-jwt-secret
-NEXT_PUBLIC_JANUA_URL=http://localhost:8001
+NEXT_PUBLIC_JANUA_URL=http://localhost:4100
 ```
 
 #### Middleware Setup (`middleware.ts`)
@@ -156,7 +157,8 @@ npm install @janua/typescript-sdk jose
 
 #### Environment Variables
 ```env
-JANUA_API_URL=http://janua-api:8001
+# Port 4100 per PORT_ALLOCATION.md (Janua block: 4100-4199)
+JANUA_API_URL=http://janua-api:4100
 JANUA_JWT_SECRET=your-shared-jwt-secret
 ```
 
@@ -301,7 +303,8 @@ pip install python-jose[cryptography] httpx
 
 #### Environment Variables
 ```env
-JANUA_API_URL=http://janua-api:8001
+# Port 4100 per PORT_ALLOCATION.md (Janua block: 4100-4199)
+JANUA_API_URL=http://janua-api:4100
 JANUA_JWT_SECRET=your-shared-jwt-secret
 ```
 
@@ -504,27 +507,30 @@ Janua JWT tokens contain:
 ## Testing Unified Auth
 
 ```bash
+# Port 4100 per PORT_ALLOCATION.md (Janua block: 4100-4199)
+
 # 1. Register user via Janua
-curl -X POST http://localhost:8001/auth/register \
+curl -X POST http://localhost:4100/api/v1/auth/register \
   -H "Content-Type: application/json" \
   -d '{"email": "test@example.com", "password": "SecurePass123!"}'
 
 # 2. Login to get JWT
-TOKEN=$(curl -X POST http://localhost:8001/auth/login \
+TOKEN=$(curl -X POST http://localhost:4100/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email": "test@example.com", "password": "SecurePass123!"}' \
   | jq -r '.access_token')
 
-# 3. Access Cotiza API with Janua token
-curl http://localhost:8200/api/v1/quotes \
+# 3. Access Cotiza API with Janua token (port 4500)
+curl http://localhost:4500/api/v1/quotes \
   -H "Authorization: Bearer $TOKEN"
 
-# 4. Access Forgesight API with same token
-curl http://localhost:8100/api/v1/vendors \
+# 4. Access ForgeSight API with same token (port 4300)
+curl http://localhost:4300/api/v1/vendors \
   -H "Authorization: Bearer $TOKEN"
 
-# 5. Access MADFAM Site protected route
-# (Token should be in cookie after login)
+# 5. Access Enclii API with same token (port 4200)
+curl http://localhost:4200/api/v1/projects \
+  -H "Authorization: Bearer $TOKEN"
 ```
 
 ---

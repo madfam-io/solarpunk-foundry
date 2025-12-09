@@ -198,11 +198,11 @@ All services connect to shared PostgreSQL, Redis, and MinIO via `madfam-shared-n
 - MinIO: `localhost:9000` (API) / `localhost:9001` (Console)
 
 ### Service URLs (Local Development)
-| Service | URL |
-|---------|-----|
-| MADFAM Site | http://localhost:3000 |
-| Janua Auth | http://localhost:8001 |
-| Forgesight | http://localhost:8200 |
-| Digifab Quoting | http://localhost:8300 |
-| Dhanam | http://localhost:8500 |
-| Sim4D Studio | http://localhost:5173 |
+| Service | URL | Port Block |
+|---------|-----|------------|
+| MADFAM Site | http://localhost:3000 | Legacy |
+| Janua Auth | http://localhost:4100 | 4100-4199 |
+| Enclii PaaS | http://localhost:4200 | 4200-4299 |
+| ForgeSight | http://localhost:4300 | 4300-4399 |
+| Dhanam | http://localhost:4700 | 4700-4799 |
+| Sim4D Studio | http://localhost:4800 | 4800-4899 |

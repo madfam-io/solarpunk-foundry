@@ -145,8 +145,10 @@ Update any README files or docs that reference ports.
 ### Migration Commands
 
 ```bash
-# SSH to server
-ssh -i ~/.ssh/id_ed25519 root@95.217.198.239
+# SSH to server (via Cloudflare Zero Trust tunnel)
+ssh ssh.madfam.io
+# Note: Requires cloudflared installed and ~/.ssh/config configured
+# User: solarpunk (use sudo for admin commands)
 
 # Pull latest code
 cd /opt/solarpunk/janua
