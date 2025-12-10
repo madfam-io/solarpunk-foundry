@@ -19,7 +19,13 @@ Solarpunk Foundry is the **central nervous system** of the MADFAM ecosystem. It 
 ## Quick Start
 
 ```bash
-# From ~/labspace root
+# Recommended: Use enclii local CLI (from enclii/packages/cli)
+enclii local up        # Start infra + all services
+enclii local infra     # Start only PostgreSQL, Redis, MinIO, MailHog
+enclii local status    # Check all service ports
+enclii local down      # Stop everything
+
+# Alternative: Legacy madfam script (from ~/labspace root)
 ./madfam start       # Start core ecosystem (Janua, Enclii, databases)
 ./madfam full        # Start full ecosystem (all 18 services)
 ./madfam status      # Check running services
@@ -183,7 +189,9 @@ See `docs/PORT_ALLOCATION.md` for complete registry with sub-port schema.
 | File | Purpose |
 |------|---------|
 | `README.md` | Vision, architecture, licensing strategy |
-| `ops/bin/madfam.sh` | Main orchestration script (17KB) |
+| `docs/INFRASTRUCTURE_STATUS.md` | Current local + production infrastructure state |
+| `ops/local/docker-compose.shared.yml` | Shared infrastructure (PostgreSQL, Redis, MinIO) |
+| `ops/local/init-databases.sql` | Multi-tenant database initialization |
 | `docs/PORT_ALLOCATION.md` | Service port registry |
 | `docs/DOGFOODING_GUIDE.md` | Local development setup |
 | `docs/ENCLII_MIGRATION_PLAN.md` | Vercel/Railway → Enclii plan |
@@ -222,11 +230,12 @@ All `@madfam/*` packages use the private registry:
 
 ## Related Documentation
 
-- **Ecosystem Overview**: See README.md sections I-IV
+- **Infrastructure Status**: `docs/INFRASTRUCTURE_STATUS.md` (Local + Production state)
 - **Port Registry**: `docs/PORT_ALLOCATION.md`
 - **Dogfooding**: `docs/DOGFOODING_GUIDE.md`
 - **Migration**: `docs/ENCLII_MIGRATION_PLAN.md`
 - **Architecture**: `docs/architecture/`
+- **Ecosystem Overview**: See README.md sections I-IV
 
 ---
 

@@ -253,11 +253,46 @@
 
 ---
 
-### Layer 7: Reserved — 5800-6999
+### Layer 7: Creative & GPU Services — 5800-5999
+
+#### ceq (Creative Entropy Quantized) — 5800-5899
+
+> *The Skunkworks Terminal for the Generative Avant-Garde*  
+> **Domain**: ceq.lol
+
+| Port | Service | Container | Purpose |
+|------|---------|-----------|---------|
+| 5800 | API | ceq-api | FastAPI workflow orchestration |
+| 5801 | Studio | ceq-studio | Next.js terminal UI |
+| 5802 | Admin | ceq-admin | Template management |
+| 5810-5819 | Workers | ceq-worker-{n} | ComfyUI GPU workers |
+| 5820 | WebSocket | ceq-ws | Real-time job progress |
+| 5850 | API (Dev) | ceq-api-dev | Development variant |
+| 5890 | Metrics | ceq-metrics | Prometheus endpoint |
+
+**Dependencies**: Furnace (GPU), Janua (auth), R2 (storage), Redis (queue)
+
+#### Furnace (GPU Infrastructure) — Embedded in Enclii
+
+> Furnace is **not a standalone service** but an extension of Enclii.
+> Uses Enclii's port range (4200-4299) for API access.
+
+| Port | Service | Container | Purpose |
+|------|---------|-----------|---------|
+| 4210 | Gateway | furnace-gateway | Serverless endpoint API |
+| 4211 | Scheduler | furnace-scheduler | Job scheduling (internal) |
+| 4212 | Registry | furnace-registry | Template/model registry |
+| 4215 | Metrics | furnace-metrics | GPU metrics endpoint |
+
+**Note**: Workers run on GPU nodes as Kubernetes deployments, not fixed ports.
+
+---
+
+### Layer 8: Reserved — 6000-6999
 
 Reserved for future services. Each 100-port block can accommodate one service.
 
-Available slots: **12 services** (5800, 5900, 6000, 6100, 6200, 6300, 6400, 6500, 6600, 6700, 6800, 6900)
+Available slots: **10 services** (6000, 6100, 6200, 6300, 6400, 6500, 6600, 6700, 6800, 6900)
 
 ---
 
@@ -304,7 +339,8 @@ Every service follows this internal structure within its 100-port block:
 | 11 | BloomScroll | Content cache |
 | 12 | Compendium | Search cache |
 | 13 | Blueprint | Index cache |
-| 14-15 | Reserved | Future use |
+| 14 | ceq | Workflow queue, job state |
+| 15 | Furnace | GPU job queue (Enclii extension) |
 
 ---
 

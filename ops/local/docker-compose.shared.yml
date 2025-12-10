@@ -24,7 +24,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres_shared_data:/var/lib/postgresql/data
-      - ../db/init-shared-dbs.sql:/docker-entrypoint-initdb.d/01-init-dbs.sql
+      - ./init-databases.sql:/docker-entrypoint-initdb.d/01-init-dbs.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U madfam"]
       interval: 10s

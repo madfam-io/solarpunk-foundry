@@ -88,6 +88,7 @@ declare const products: {
         readonly repo: "enclii";
         readonly githubOrg: "madfam-io";
         readonly license: "AGPL-3.0";
+        readonly defaultPort: 4200;
         readonly isPublic: true;
         readonly phase: 1;
     };
@@ -100,7 +101,7 @@ declare const products: {
         readonly repo: "janua";
         readonly githubOrg: "madfam-io";
         readonly license: "AGPL-3.0";
-        readonly defaultPort: 8001;
+        readonly defaultPort: 4100;
         readonly isPublic: true;
         readonly phase: 1;
     };
@@ -113,6 +114,7 @@ declare const products: {
         readonly repo: "fortuna";
         readonly githubOrg: "aureo-labs";
         readonly license: "Proprietary";
+        readonly defaultPort: 4400;
         readonly isPublic: false;
         readonly phase: 2;
     };
@@ -125,7 +127,7 @@ declare const products: {
         readonly repo: "forgesight";
         readonly githubOrg: "aureo-labs";
         readonly license: "Proprietary";
-        readonly defaultPort: 8100;
+        readonly defaultPort: 4300;
         readonly isPublic: false;
         readonly phase: 2;
     };
@@ -211,7 +213,7 @@ declare const products: {
         readonly repo: "digifab-quoting";
         readonly githubOrg: "aureo-labs";
         readonly license: "Proprietary";
-        readonly defaultPort: 8200;
+        readonly defaultPort: 4500;
         readonly isPublic: false;
         readonly phase: 4;
     };
@@ -224,7 +226,7 @@ declare const products: {
         readonly repo: "dhanam";
         readonly githubOrg: "madfam-io";
         readonly license: "AGPL-3.0";
-        readonly defaultPort: 8500;
+        readonly defaultPort: 4700;
         readonly isPublic: true;
         readonly phase: 1;
     };

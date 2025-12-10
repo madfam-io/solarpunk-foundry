@@ -51,6 +51,7 @@ var products = {
     repo: "enclii",
     githubOrg: "madfam-io",
     license: "AGPL-3.0",
+    defaultPort: 4200,
     isPublic: true,
     phase: 1
   },
@@ -63,7 +64,7 @@ var products = {
     repo: "janua",
     githubOrg: "madfam-io",
     license: "AGPL-3.0",
-    defaultPort: 8001,
+    defaultPort: 4100,
     isPublic: true,
     phase: 1
   },
@@ -79,6 +80,7 @@ var products = {
     repo: "fortuna",
     githubOrg: "aureo-labs",
     license: "Proprietary",
+    defaultPort: 4400,
     isPublic: false,
     phase: 2
   },
@@ -91,7 +93,7 @@ var products = {
     repo: "forgesight",
     githubOrg: "aureo-labs",
     license: "Proprietary",
-    defaultPort: 8100,
+    defaultPort: 4300,
     isPublic: false,
     phase: 2
   },
@@ -183,7 +185,7 @@ var products = {
     repo: "digifab-quoting",
     githubOrg: "aureo-labs",
     license: "Proprietary",
-    defaultPort: 8200,
+    defaultPort: 4500,
     isPublic: false,
     phase: 4
   },
@@ -196,7 +198,7 @@ var products = {
     repo: "dhanam",
     githubOrg: "madfam-io",
     license: "AGPL-3.0",
-    defaultPort: 8500,
+    defaultPort: 4700,
     isPublic: true,
     phase: 1
   },
