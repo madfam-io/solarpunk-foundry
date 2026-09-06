@@ -6,7 +6,7 @@
 > `kubectl`, `helm`, SSH, provider CLI/API, `docker exec`, and direct container
 > access as platform bootstrap or documented break-glass only, and record any
 > missing Enclii adapter gap.
-> Last Updated: 2026-09-04
+> Last Updated: 2026-09-06
 
 <!-- MADFAM-AGENTS-CANONICAL v1 -->
 
